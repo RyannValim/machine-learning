@@ -1,0 +1,19 @@
+Métodos úteis das funções:
+ -MinMaxScaler:
+    .fit(X)
+    .transform(X)
+    .fit_transform(X)
+    .inverse_transform(X)
+
+ -LabelEncoder:
+    .fit(X)
+    .transform(X)
+    .fit_transform(X)
+    .inverse_transform(X)
+
+ -OneHotEncoder:
+    .fit(X)
+    .transform(X)
+    .fit_transform(X)
+    .inverse_transform(X)
+    .transform_instance(instancia)

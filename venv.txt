@@ -1,16 +1,16 @@
 1. Para configurar o ambiente .venv, incluir no terminal o seguinte:
  - Em windows:
-    Para criar: `python -m venv .venv`
-    Para ativar: `.\.venv\Scripts\activate`
+    Para criar: `python -m venv .venv`;
+    Para ativar: `.\.venv\Scripts\activate`.
 
  - Em linux/mac:
-    Para `criar: python -m venv .venv`
-    Para `ativar: source venv/bin/activate`
+    Para `criar: python -m venv .venv`;
+    Para `ativar: source venv/bin/activate`.
 
  - No terminal deve aparecer:
-    `(.venv) PS <DIRETÓRIO_DO_PROJETO>>`
+    `(.venv) PS <DIRETÓRIO_DO_PROJETO>>`.
 
 2. Requerimentos para rodar o programa:
- - `pip install numpy scikit-learn pandas`
- - Se precisar dar update no pip (windows):
-   `python.exe -m pip install --upgrade pip`
+ - `pip install numpy scikit-learn pandas`;
+ - Se precisar dar update no pip (Windows):
+   `python.exe -m pip install --upgrade pip`.
