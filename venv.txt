@@ -11,6 +11,6 @@
     `(.venv) PS <DIRETÓRIO_DO_PROJETO>>`.
 
 2. Requerimentos para rodar o programa:
- - `pip install numpy scikit-learn pandas`;
+ - `pip install numpy scikit-learn pandas matplotlib`;
  - Se precisar dar update no pip (Windows):
    `python.exe -m pip install --upgrade pip`.
