@@ -17,3 +17,5 @@ Métodos úteis das funções:
     .fit_transform(X)
     .inverse_transform(X)
     .transform_instance(instancia)
+
+Módulo de descrição: precisa abrir o modelo e ler o centróide.

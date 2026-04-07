@@ -100,4 +100,5 @@ print('\nNúmero ótimo de clusters: ', numero_clusters_otimo)
 cluster_iris = KMeans(
     n_clusters=numero_clusters_otimo, random_state=42
 ).fit(dados_norm)
+print(dados_norm.columns)
 pickle.dump(cluster_iris, open('cluster_iris.pkl', 'wb'))
