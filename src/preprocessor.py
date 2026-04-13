@@ -1,7 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler, OneHotEncoder
 
-
 class Normalize:
     def __init__(self):
         self.scaler = MinMaxScaler()

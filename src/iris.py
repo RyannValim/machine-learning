@@ -27,7 +27,7 @@ scaler = MinMaxScaler()
 normalizador = scaler.fit(dados_num)
 
 # salvar o modelo normalizador
-pickle.dump(normalizador, open('normalizador_iris.pkl', 'wb')) # salva no .pkl no projeto
+pickle.dump(normalizador, open('../modelos/normalizador_iris.pkl', 'wb')) # salva no .pkl no projeto
 
 # normalizar os dados numéricos com fit_transform()
 dados_num_norm = normalizador.fit_transform(dados_num)
@@ -70,7 +70,7 @@ ax.plot(K, distorcoes)
 ax.set(xlabel = 'n Clusters', ylabel = 'Distorcoes')
 ax.grid()
 # plt.show()
-plt.savefig('elbow_curve.png', dpi=150, bbox_inches='tight')
+plt.savefig('../plotagens/elbow_curve.png', dpi=150, bbox_inches='tight')
 plt.close()
 
 #determinar o número ótimo de clusters
@@ -101,4 +101,4 @@ cluster_iris = KMeans(
     n_clusters=numero_clusters_otimo, random_state=42
 ).fit(dados_norm)
 print(dados_norm.columns)
-pickle.dump(cluster_iris, open('cluster_iris.pkl', 'wb'))
+pickle.dump(cluster_iris, open('../modelos/cluster_iris.pkl', 'wb'))
