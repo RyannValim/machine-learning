@@ -1,0 +1,85 @@
+Para leitura de documentação, pode-se fazer o seguinte:
+    - Abrir o interpretador do python: basta digitar "python" no terminal,
+     que o interpretador abrirá.
+    - Buscar a documentação de algo, por exemplo: "import pandas as pd" e
+     "help(pd.read_csv)". Ao fazer isto, a documentação daquele método
+     aparecerá.
+
+Diferença de método e propriedade:
+    - método -> precisa de parênteses: df.head(10)
+    - propriedade -> sem parâmetros: df.dtypes
+
+pd.read_csv(filepath, sep=',')
+    - É um método do pandas (com parênteses).
+    ARGUMENTOS
+    - filepath: caminho para o arquivo CSV (string)
+    - sep: separador de colunas (padrão é vírgula)
+    RETORNO:
+    - DataFrame
+
+df.dtypes
+    - Propriedade que mostra os tipos e os nomes das colunas de um DF.
+
+df.select_dtypes(include=None, exclude=None)
+    - É um método do pandas (com parênteses).
+    ARGUMENTOS
+    - include: tipo(s) de coluna para selecionar.
+    - exclude: tipo(s) de coluna para ignorar.
+    RETORNO:
+    - DataFrame só com as colunas do tipo escolhido.
+
+Numpy Array (1D): Equivale apenas a uma lista crua de dados, por exemplo
+[0, 1, 0, 2, ...]. Não tem nome, não tem formato de tabela, só texto solto.
+
+Pandas Series (1D): É uma única colina do Excel, Ela tem os dados e um título
+no topo.
+
+Pandas DataFrame (2D): É a planilha inteira, é feita de várias "Series"
+coladas lado a lado.
+
+pd.DataFrame():
+    - 1° Parâmetro: "dados", precisa ser 2D.
+    - 2° Parâmetro: "columns", parâmetro que mostra quais serão as colunas
+        que serão criadas para o DataFrame.
+
+ohe_encoder.get_feature_names_out():
+    Método do OneHotEncoder, que consegue ver o nome das colunas, pode ser
+    utilizado em conjunto com o parâmetro "columns" de pd.DataFrame() para
+    facilitar a codificação dos dados categóricos.
+
+-------------------------------------------------------------------------------------------
+LabelEncoder (SKLearn): Converte categorias em números inteiros sequenciais:
+    - Iris-setosa       -> 0
+    - Iris-versicolor   -> 1
+    - Iris-virginica    -> 2
+
+    Uma coluna vira uma coluna, O problema: o modelo pode interpretar
+    `2 > 1 > 0`, ou seja, que estes números são ORDINAIS (existe ordem
+    entre eles), o que não seria verdadeiro se tratando de espécies de
+    flores.
+
+OneHotEncoder (SKLearn): Resolve o problema de dados ordinais criando
+ uma coluna binária para cada categoria, assim gerando os dados NOMINAIS:
+    - Iris-setosa       -> [1, 0, 0]
+    - Iris-versicolor   -> [0, 1, 0]
+    - Iris-virginica    -> [0, 0, 1]
+
+    Cada coluna vira várias colunas. Não implica ordem e é o mais correto
+    para dados categóricos nominais.
+
+pd.get_dummies() (Pandas): Faz exatamente a mesma coisa que o OneHotEncoder,
+ porém ele é um método do pandas (mais simples de usar), retornará um DataFrame
+ direto. A diferença prática é que o OneHotEncoder pode ser salvo com o Pickle
+ e reutilizado em dados novos. O get_dummies() não tem esse "estado" para salvar.
+
+RESUMO:
+- LabelEncoder (SKLearn)    ->  1 coluna -> 1 coluna numérica (implica ordem).
+- OneHotEncoder (SKLearn)   ->  1 coluna -> N colunas binárias (não implica ordem).
+- pd.get_dummies() (Pandas) ->  1 coluna -> N colunas binárias (não implica ordem).
+
+Para dados numéricos, é necessário normalizar (ou padronizar) os dados utilizando
+algum método scaler, como o MinMaxScaler() do SKLearn.
+
+Para dados categóricos, é necessário codificar os dados, utilizando algum encoder,
+como LabelEncoder() ou OneHotEncoder(), ambos vistos acima.
+-------------------------------------------------------------------------------------------
