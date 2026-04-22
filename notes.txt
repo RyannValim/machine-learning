@@ -17,6 +17,8 @@ pd.read_csv(filepath, sep=',')
     RETORNO:
     - DataFrame
 
+df.head() / df.tail() / df.to_string(): Maneiras eficientes de mostrar o DF.
+
 df.dtypes
     - Propriedade que mostra os tipos e os nomes das colunas de um DF.
 
@@ -83,3 +85,56 @@ algum método scaler, como o MinMaxScaler() do SKLearn.
 Para dados categóricos, é necessário codificar os dados, utilizando algum encoder,
 como LabelEncoder() ou OneHotEncoder(), ambos vistos acima.
 -------------------------------------------------------------------------------------------
+
+Opções para o tratamento de valores ausentes (NA)
+1. Exclusão de Dados (Drop)
+    - Remover Linhas (Listwise deletion / dropna):
+        > Quando usar: quando a quantidade de NAs é mínima (geralmente <5% do dataset) e
+         a remoção não altera a representatividade da amostra.
+        > Contra: Risco de perder muita informação útil se aplicado em larga escala.
+    
+    - Remover Colunas:
+        > Quando usar: quando uam coluna possui taxa massiva de NAs (ex: > 40-50%)
+         e não possui forte correlação com a variável alvo.
+
+2. Imputação Simples (Preenchimento Estático)
+    - Mediana: Preenche com o valor central:
+        > Quando usar: varuáveis numéricas com muitos outliers (valores extremos),
+         pois a mediana é resistente a distorções.
+        
+    - Média: Preenche com a média aritmética:
+        > Quando usar: variáveis numéricas com distribuição normal/simétrica
+         (sem outliers graves).
+    
+    - Moda: Preenche com o valor mais frequente:
+        > Quando usar: variáveis categóricas (texto/classes) ou numéricas discretas.
+    
+    - Valor Constante (fillna): substituir por "Desconhecido", "0", ou "-1":
+        > Quanod usar: quando a própria ausência da informação é um dado importante
+         (ex: se o campo "Data de Cancelamento" é NA, o cliente ainda está ativo).
+
+3. Imputação em Séries Temporais (Time Series)
+    - Forward Fill (ffill) / Backward Fill (bfill): propaga o último falor válido
+     para frente ou o próximo valor para trás.
+    
+    - Interpolação: traça uma reta ou curva entre o ponto anterior e o próximo
+     para estimar o valor intermediário.
+        > Quando usar: sensores, cotações financeiras, e dados onde existe uma
+         continuidade temporal óbvia.
+
+4. Imputação Avançada (Machine Learning)
+    - KNN Imputer: encontra os k vizinhos mais próximos (linhas mais parecidas com
+     a que tem o NA) e tira a média/mediana deles para preencher o buraco.
+    
+    - Interative Imputer (Multivariate): trata a coluna com NAs como a variável alvo
+     e usa as outras colunas como features para treinar um modelo de regressão e
+     prever o valor exato.
+        > Quando usar: quando a precisão é fundamental e você tem poder computacional
+         disponível.
+
+5. Resumo - Para dados:
+    Categóricos - Preencher com a MODA.
+    Numéricos (outliers grandes) - Preencher com a MEDIANA.
+    Numéricos (sem outliers significativos) - Preencher com a MÉDIA.
+    Séries Temporais/Sequenciais: Propagação (ffill/bfill) ou Interpolação.
+    Ausência é Informação: Preenchimento estático (ex: "Desconhecido" ou "0").

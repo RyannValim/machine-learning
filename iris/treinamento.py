@@ -6,16 +6,17 @@ from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
 
 class Treinar:
-    def __init__(self, df_normalizado):
-        self.df_normalizado = df_normalizado
+    def __init__(self, df_iris_normalizado):
+        self.df_iris_normalizado = df_iris_normalizado
     
     def calcular_elbow(self):
         distorcoes = []
         K = range(1, 101)
         for i in K:
-            cluster_treinador = KMeans(n_clusters=i, random_state=42).fit(self.df_normalizado)
+            treinador_iris = KMeans(n_clusters=i, random_state=42).fit(self.df_iris_normalizado)
             distorcoes.append(
-                sum(np.min(cdist(self.df_normalizado, cluster_treinador.cluster_centers_, 'euclidean'), axis=1) / self.df_normalizado.shape[0])
+                sum(np.min(cdist(self.df_iris_normalizado, treinador_iris.cluster_centers_, 'euclidean'),
+                           axis=1) / self.df_iris_normalizado.shape[0])
             )
         
         distancias = []
@@ -33,15 +34,15 @@ class Treinar:
             ) / sqrt((yn - y0)**2 + (xn - x0)**2))
             
         plt.plot(K, distorcoes)
-        plt.savefig('./plotagens/elbow_curve.png')
+        plt.savefig('../plotagens/iris/elbow_curve_iris.png')
         plt.close()
         
         k_otimo = K[distancias.index(np.max(distancias))]
         return k_otimo
     
     def treinar(self, k_otimo):
-        cluster_treinador = KMeans(n_clusters=k_otimo, random_state=42).fit(self.df_normalizado)
-        return cluster_treinador
+        treinador_iris = KMeans(n_clusters=k_otimo, random_state=42).fit(self.df_iris_normalizado)
+        return treinador_iris
         
-    def salvar(self, cluster_treinador):
-        pickle.dump(cluster_treinador, open('./modelos/cluster_treinador.pkl', 'wb'))
+    def salvar(self, treinador_iris):
+        pickle.dump(treinador_iris, open('../modelos/iris/treinador_iris.pkl', 'wb'))
