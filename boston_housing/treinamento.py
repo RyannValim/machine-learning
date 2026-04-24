@@ -1,28 +1,28 @@
 import pickle
 import numpy as np
-from math import sqrt
 import matplotlib.pyplot as plt
-from scipy.spatial.distance import cdist
+from math import sqrt
 from sklearn.cluster import KMeans
+from scipy.spatial.distance import cdist
 
 class Treinar():
-    def __init__(self):
-        self.treinador = KMeans()
+    def __init__(self, df):
+        self.df = df
     
-    def treinar(self, df):
-        k_otimo = self.calc_elbow(df)
-        self.treinador = KMeans(n_clusters=k_otimo, random_state=42).fit(df)
-        return self.treinador
+    def treinar(self):
+        k_otimo = self.calc_elbow()
+        treinador = KMeans(n_clusters=k_otimo, random_state=42).fit(self.df)
+        return treinador
     
-    def calc_elbow(self, df):
+    def calc_elbow(self):
         distorcoes = []
-        clusters = range(1, 11)
+        clusters = range(1, 201)
         for c in clusters:
-            self.treinador = KMeans(n_clusters=c, random_state=42).fit(df)
+            treinador = KMeans(n_clusters=c, random_state=42).fit(self.df)
             distorcoes.append(
                 sum(np.min(cdist(
-                    df, self.treinador.cluster_centers_, 'euclidean'),
-                           axis=1) / df.shape[0])
+                    self.df, treinador.cluster_centers_, 'euclidean'),
+                           axis=1) / self.df.shape[0])
             )
         
         distancias = []

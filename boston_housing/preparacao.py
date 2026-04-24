@@ -1,14 +1,10 @@
-class Preparar():
-    def __init__(self):
-        pass
-    
+class Preparar():    
     def preparar(self, df):
         colunas = ('CRIM', 'ZN', 'INDUS', 'AGE', 'LSTAT')
+        df['CHAS'] = df['CHAS'].fillna(df['CHAS'].mode()[0])
         
         for coluna in colunas:
-            df[coluna] = df[coluna].fillna(df[coluna].median())
-        
-        df['CHAS'] = df['CHAS'].fillna(df['CHAS'].mode()[0])
+            df[coluna] = df[coluna].fillna(df[coluna].median())        
         
         return df
         

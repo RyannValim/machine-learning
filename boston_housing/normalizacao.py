@@ -4,13 +4,13 @@ from sklearn.preprocessing import MinMaxScaler
 
 class Normalizar():
     def __init__(self):
-        self.normalizador = MinMaxScaler()
+        self.normalizador_bh = MinMaxScaler()
     
     def normalizar(self, df):
-        self.normalizador.fit(df)
-        df_norm = pd.DataFrame(self.normalizador.transform(df), columns=df.columns)
+        self.normalizador_bh.fit(df)
+        df_norm = pd.DataFrame(self.normalizador_bh.transform(df), columns=df.columns)
         return df_norm
         
-    def salvar(self, df, modelo):
+    def salvar(self, df):
         df.to_csv('../datasets/boston_housing/HousingDataNorm.csv', index=False)
-        pickle.dump(modelo, open('../modelos/boston_housing/minmax_bh.pkl', 'wb'))
+        pickle.dump(self.normalizador_bh, open('../modelos/boston_housing/minmax_bh.pkl', 'wb'))
